@@ -37,7 +37,12 @@
                 <button type="submit" id="search-icon" class="material-symbols-outlined">search</span>
             </form>
         </div>
-        <div id="movies"></div>
+        <div id="movies">
+        <div id="missing">
+        <img src="/images/missing.jpg" alt="Missing" id="missing-img">
+        <h2>Search for movies to see results here</h2>
+        </div>
+        </div>
         `;
     }
 

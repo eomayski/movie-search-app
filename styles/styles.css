@@ -34,8 +34,9 @@ body{
 main{
     height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 #home {
@@ -122,6 +123,7 @@ main{
 }
 #search{
     max-width: 300px;
+    margin: 20px;
     height: 50px;
     font-size: 18px;
     background: rgb(255, 255, 255, 0.1);
@@ -140,6 +142,26 @@ main{
     justify-content: space-between;
 }
 
+#movies{
+    width: 90%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#missing-img{
+    margin: 20px 0px 20px 0px;
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35);
+}
 @keyframes gradient {
     0%{
         background-position: 0% 50%;
