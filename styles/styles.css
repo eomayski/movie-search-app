@@ -10,20 +10,76 @@ header{
     color: white;
     background: rgb(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgb(255, 255, 255, 0.2);
+    top: 0px;
+    position: fixed;
+    /* border: 1px solid rgb(255, 255, 255, 0.2); */
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35);
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
+.active{
+    color: #44b4e4;
+}
+
 body{
     min-height: 100vh;
-    background: linear-gradient(45deg, #72cada, #301a92);
+    background: linear-gradient(45deg, #fa7a03, #301a92);
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+main{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#home {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+}
+
+#home-img{
+    max-width: 800px;
+    margin: 50px;
+    margin-top: 20px;
+    border-radius: 30px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35);
+    grid-area: 1/1/4/4;
+}
+
+#home-title{
+    text-align: center;
+    text-shadow: #72cada 0px 0px 15px;
+    grid-area: 2/2/2/2;
+    z-index: 1;
+    padding: 20px;
+    background: rgb(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35);
+}
+
+#home-title h1{
+    font-size: 35px;
+}
+
+#home-title p{
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 #home-btn, #search-btn, #favorites-btn{
@@ -37,6 +93,7 @@ body{
 #home-btn:hover, #search-btn:hover, #favorites-btn:hover{
     color: #44b4e4;
     transform: scale(1.1);
+    text-shadow: #72cada 0px 0px 15px;
 }
 
 #search-icon{
@@ -51,6 +108,7 @@ body{
 
 #search-icon:hover{
     color: #44b4e4;
+    text-shadow: #72cada 0px 0px 15px;
 }
 
 #search-input{
@@ -64,12 +122,13 @@ body{
 }
 #search{
     max-width: 300px;
+    height: 50px;
     font-size: 18px;
     background: rgb(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgb(255, 255, 255, 0.2);
     border-radius: 30px;
-    margin: 20px;
+    margin-top: 100px;
     color: white;
     border: 1px solid rgb(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35);
