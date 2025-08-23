@@ -112,16 +112,24 @@
         let poster = movie.Poster === "N/A" ? "/images/no-poster.jpg" : movie.Poster;
 
         div.innerHTML = `
-                <img class="card-img-top" src=${poster} alt="Card image cap" width="400" />
-                    <div class="card-body">
-                    <h4 class="card-title">${movie.Title}</h4>
-                    <a href="details">
-                    </a>
-                    </div>
-                    <div class="card-footer">
-                    <button type="button" data-id=${movie.imdbID} class="btn btn-info">Details</button>
-                    </div>
+            <div class="card-img-top">
+                <img src=${poster} alt="Card image"/>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">${movie.Title}</h4>
+                <p class="card-text">${movie.Year}</p>
+                <a href="details">
+                </a>
+            </div>
+            <div class="card-footer">
+                <button type="button" data-id=${movie.imdbID} class="btn btn-info">Details</button>
+            </div>
         `
+
+        const img = div.querySelector("img");
+        if (img.textContent === "Card image") {
+            poster = "/images/no-poster.jpg"
+        }
 
         div.querySelector("button").addEventListener("click", showDetails)
 
