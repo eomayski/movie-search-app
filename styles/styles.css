@@ -207,6 +207,45 @@ main{
      width: 100%;
 }
 
+
+.card-footer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.card-footer button{
+    background: transparent;
+    display: block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.card-footer button:hover{
+    color: #44b4e4;
+    transform: scale(1.2);
+    text-shadow: #72cada 0px 0px 15px;
+}
+
+.card-footer span{
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card-footer span:hover{
+    color: #44b4e4;
+    transform: scale(1.2);
+    text-shadow: #72cada 0px 0px 15px;
+}
+
 footer{
     width: 100%;
     font-size: 20px;
@@ -220,6 +259,43 @@ footer{
     padding: 10px;
     position: bottom;
 }
+
+/* Movie Details Section */
+
+#details-card{
+    width: 80%;
+    height: max-content;
+    margin: 50px;
+    grid-area: 1 / 2 / 6 / 5;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgb(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+#details-card img{
+    border-radius: 20px 0px 0px 20px;
+    height: auto;
+    width: 300px;
+
+}
+
+#details-info {
+    min-width: 200px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    row-gap: 25px;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: space-between;
+}
+
 
 @keyframes gradient {
     0%{

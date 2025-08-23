@@ -240,6 +240,7 @@
     }
 
    async function showDetails(event) {
+        document.querySelectorAll('.active').forEach(btn => btn.classList.remove('active'))
         const id = event.target.dataset.id;
 
         const movie = await getMovieByID(id);
@@ -259,11 +260,11 @@
                 <div id="details-info">
                     <p><strong>Genre:</strong> ${movie.Genre}</p>
                     <p><strong>Director:</strong> ${movie.Director}</p>
-                    <p><strong>Actors:</strong> ${movie.Actors}</p>
+                    <p><strong>Cast:</strong> ${movie.Actors}</p>
                     <p><strong>Plot:</strong> ${movie.Plot}</p>
                     <p><strong>IMDB Rating:</strong> ${movie.imdbRating}</p>
                 </div>
-                <div class="card-footer">
+                <div class="fav-icon">
                 
                 </div>
             </div>
