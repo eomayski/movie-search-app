@@ -34,9 +34,10 @@
         
     }
 
-    getMovieBySearch('ejijio;jej');
+    
+    // Event handler for search form submission
     function onSearch(event) {
-        
+        event.preventDefault();
     }
 
 })();
