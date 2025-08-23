@@ -162,7 +162,7 @@
         if (!movies) {
             return
         }
-        
+
         movieList.innerHTML = "";
         movies.forEach(movie => createMovie(movie));
     }
@@ -181,8 +181,6 @@
             <div class="card-body">
                 <h4 class="card-title">${movie.Title}</h4>
                 <p class="card-text">${movie.Year}</p>
-                <a href="details">
-                </a>
             </div>
             <div class="card-footer">
                 <button type="button" data-id=${movie.imdbID} class="btn btn-info">Details</button>
@@ -241,8 +239,37 @@
         movieList.appendChild(div)
     }
 
-    function showDetails(event) {
+   async function showDetails(event) {
         const id = event.target.dataset.id;
+
+        const movie = await getMovieByID(id);
+        if (!movie) {
+            return;
+        }
+
+        main.innerHTML = `
+        <div id="movie-details">
+            <h1>${movie.Title} (${movie.Year})</h1>
+        </div>
+        <div id="movies">
+            <div id="details-card">
+                <div id="details-img">
+                    <img src=${movie.Poster === "N/A" ? "/images/no-poster.jpg" : movie.Poster} alt="Movie Poster"/>
+                </div>
+                <div id="details-info">
+                    <p><strong>Genre:</strong> ${movie.Genre}</p>
+                    <p><strong>Director:</strong> ${movie.Director}</p>
+                    <p><strong>Actors:</strong> ${movie.Actors}</p>
+                    <p><strong>Plot:</strong> ${movie.Plot}</p>
+                    <p><strong>IMDB Rating:</strong> ${movie.imdbRating}</p>
+                </div>
+                <div class="card-footer">
+                
+                </div>
+            </div>
+        </div>
+        `;
+        
     }
 
 

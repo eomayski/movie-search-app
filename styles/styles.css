@@ -25,7 +25,7 @@ header{
 
 body{
     min-height: 100vh;
-    background: linear-gradient(45deg, #fa7a03, #301a92);
+    background: linear-gradient(45deg, #aa5d04, #2505d6, #0468ff);
     color: white;
     display: flex;
     flex-direction: column;
@@ -235,5 +235,5 @@ footer{
 
 body {
     background-size: 200% 200%;
-    animation: gradient 20s ease infinite;
+    animation: gradient 15s ease infinite;
 }
