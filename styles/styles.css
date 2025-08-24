@@ -142,16 +142,6 @@ main{
     justify-content: space-between;
 }
 
-#movies{
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
 
 #missing{
     grid-area: 1/1/1/6;
@@ -211,6 +201,17 @@ main{
 
 /* Movie Cards */
 
+#movies{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .movie-card{
     position: relative;
     display: grid;
@@ -222,7 +223,6 @@ main{
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.35);
     border-radius: 20px;
     width: 100%;
-    margin: 1rem;
 }
 
 

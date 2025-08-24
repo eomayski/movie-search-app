@@ -135,14 +135,12 @@
 
             // Data error handling
             if (data.Response === "False") {
-                debugger
                 throw new Error(data.Error);
             }
 
             return data
         } catch (error) {
             alert(error.message);
-
         }
 
     }
