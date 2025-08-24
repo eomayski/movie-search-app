@@ -24,7 +24,7 @@
         <div id="home">
         <div id="home-title">
         <h1>Welcome to Movie Search App</h1>
-        <p>Use the search icon above to find your favorite movies!</p>
+        <p>Use the <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M15 15.0005L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> icon above to find your favorite movies!</p>
         </div>
         <img src="/images/home.jpg" alt="Movies" id="home-img">
         </div>`    }
@@ -76,7 +76,7 @@
         }
 
         const favIcons = Array.from(document.querySelectorAll('.card-footer svg'));
-        favIcons.forEach( el => el.addEventListener("click", removeOnClick))
+        favIcons.forEach(el => el.addEventListener("click", removeOnClick))
     }
 
     function removeOnClick(event) {
@@ -147,6 +147,7 @@
 
     }
 
+    let currentSearch = '';
 
     // Event handler for search form submission
     function onSearch(event) {
@@ -160,6 +161,7 @@
         }
 
         showAllMovies(search);
+        currentSearch = search;
     }
 
 
@@ -175,6 +177,21 @@
 
         movieList.innerHTML = "";
         movies.forEach(movie => createMovie(movie));
+
+        //Something like pagination
+        searchPage++;
+        const nextMovies = await getMovieBySearch(search);
+
+        if (nextMovies && nextMovies.length > 0) {
+            const nextPageBtn = document.createElement("button");
+            nextPageBtn.id = "next-page-btn";
+            nextPageBtn.textContent = "Next Page";
+            nextPageBtn.addEventListener("click", () => {
+                showAllMovies(currentSearch);
+                nextPageBtn.remove();
+            });
+            main.appendChild(nextPageBtn);
+        } else { searchPage = 1;}
     }
 
     function createMovie(movie) {
