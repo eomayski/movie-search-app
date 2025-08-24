@@ -74,7 +74,17 @@
             movieList.innerHTML = "";
             favorites.forEach(movie => createMovie(movie));
         }
+
+        const favIcons = Array.from(document.querySelectorAll('.card-footer svg'));
+        favIcons.forEach( el => el.addEventListener("click", removeOnClick))
     }
+
+    function removeOnClick(event) {
+        const parent = event.target.parentElement.parentElement.parentElement.parentElement;
+        debugger
+        parent.remove();
+    }
+
 
     // Function to fetch movies by search term
     async function getMovieBySearch(search) {
@@ -239,7 +249,8 @@
         movieList.appendChild(div)
     }
 
-   async function showDetails(event) {
+    // Function to show movie details   
+    async function showDetails(event) {
         document.querySelectorAll('.active').forEach(btn => btn.classList.remove('active'))
         const id = event.target.dataset.id;
 
@@ -270,10 +281,10 @@
             </div>
         </div>
         `;
-        
+
     }
 
-
+    // localStorage functions for Favorites
     function setFavorites(data) {
         return localStorage.setItem("Favorites", JSON.stringify(data));
 
