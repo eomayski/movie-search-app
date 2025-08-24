@@ -1,8 +1,10 @@
 (() => {
     const URL = 'https://www.omdbapi.com';
     const apiKey = `da16754b`; // If you want to use your own API key, replace this with your key.
-    
+
     let searchPage = 1;
+
+    let movieList = null;
 
     const homeBtn = document.getElementById('home-btn');
     const searchBtn = document.getElementById('search-btn');
@@ -14,7 +16,16 @@
     favoritesBtn.addEventListener('click', goToFavorites)
 
 
-    goToHome();
+
+    const favorites = getFavorites();
+    if (favorites.length > 0) {
+
+            goToFavorites()
+
+        } else {
+
+            goToHome();
+        }
 
 
     function goToHome() {
@@ -33,11 +44,13 @@
         document.querySelectorAll('.active').forEach(btn => btn.classList.remove('active'))
         searchBtn.classList.add('active')
         main.innerHTML = `
+        <div id="search-container>
         <div id="search">
             <form id="search-form">
                 <input type="text" name="search" id="search-input" placeholder="Search movie title...">
                 <button type="submit" id="search-icon" class="material-symbols-outlined">search</button>
             </form>
+        </div>
         </div>
         <div id="movies">
             <div id="missing">
@@ -68,7 +81,7 @@
         </div>
         `;
         const favorites = getFavorites();
-        if (favorites && favorites.length > 0) {
+        if (favorites.length > 0) {
             document.getElementById('missing').style.display = 'none';
             movieList = document.getElementById('movies');
             movieList.innerHTML = "";
@@ -80,8 +93,7 @@
     }
 
     function removeOnClick(event) {
-        const parent = event.target.parentElement.parentElement.parentElement.parentElement;
-        debugger
+        const parent = event.currentTarget.parentElement.parentElement.parentElement;
         parent.remove();
     }
 
@@ -164,11 +176,13 @@
 
         showAllMovies(search);
         currentSearch = search;
+
+        event.target.reset();
     }
 
 
 
-    let movieList = null;
+
     async function showAllMovies(search) {
         movieList = document.getElementById('movies');
 
@@ -182,31 +196,30 @@
 
         //Something like pagination
 
-        
         const paginationDiv = document.createElement("div")
         paginationDiv.id = "pagination";
         main.appendChild(paginationDiv);
         const prevPageBtn = document.createElement("button");
         const nextPageBtn = document.createElement("button");
-        
+
         if (searchPage > 1) {
 
             prevPageBtn.id = "prev-page-btn";
             prevPageBtn.textContent = "<";
             prevPageBtn.addEventListener("click", () => {
-                searchPage-= 2;
+                searchPage -= 2;
                 showAllMovies(search);
                 prevPageBtn.remove();
                 nextPageBtn.remove();
             });
-            paginationDiv.appendChild(prevPageBtn);     
+            paginationDiv.appendChild(prevPageBtn);
         }
 
 
         searchPage++;
         const nextMovies = await getMovieBySearch(search);
 
-        if (nextMovies && nextMovies.length > 0) {
+        if (nextMovies.length > 0) {
             nextPageBtn.id = "next-page-btn";
             nextPageBtn.textContent = ">";
             nextPageBtn.addEventListener("click", () => {
@@ -215,7 +228,7 @@
                 prevPageBtn.remove();
             });
             paginationDiv.appendChild(nextPageBtn);
-        } else { searchPage = 1;}
+        } else { searchPage = 1; }
     }
 
     function createMovie(movie) {
@@ -253,14 +266,11 @@
 </svg>`
             favIcon.addEventListener("click", removeFromFavorites);
         } else {
-            favIcon.style.FILL = 0;
             favIcon.addEventListener("click", addToFavorites);
         }
-
         function removeFromFavorites() {
             const updatedFavorites = getFavorites().filter(f => f.imdbID !== movie.imdbID);
             setFavorites(updatedFavorites);
-            favIcon.style.FILL = 0;
             favIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
   <path d="M12 2.5L14.5246 8.52504L21 9.4754L16.5 14.1246L17.5492 20.5L12 17.5L6.45078 20.5L7.5 14.1246L3 9.4754L9.4754 8.52504L12 2.5Z" />
 </svg>`;
@@ -316,12 +326,54 @@
                     <p><strong>Plot:</strong> ${movie.Plot}</p>
                     <p><strong>IMDB Rating:</strong> ${movie.imdbRating}</p>
                 </div>
-                <div class="fav-icon">
-                
-                </div>
             </div>
         </div>
         `;
+
+        const favIconDiv = document.getElementById("details-img");
+        const favorites = getFavorites();
+        const favIcon = document.createElement("span");
+        favIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2.5L14.5246 8.52504L21 9.4754L16.5 14.1246L17.5492 20.5L12 17.5L6.45078 20.5L7.5 14.1246L3 9.4754L9.4754 8.52504L12 2.5Z" />
+</svg>`;
+        if (!!favorites.find(f => f.imdbID === movie.imdbID)) {
+            favIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="orange" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2.5L14.5246 8.52504L21 9.4754L16.5 14.1246L17.5492 20.5L12 17.5L6.45078 20.5L7.5 14.1246L3 9.4754L9.4754 8.52504L12 2.5Z" />
+</svg>`
+            favIcon.addEventListener("click", removeFromFavorites);
+        } else {
+            favIcon.addEventListener("click", addToFavorites);
+        }
+
+        function removeFromFavorites() {
+            const updatedFavorites = getFavorites().filter(f => f.imdbID !== movie.imdbID);
+            setFavorites(updatedFavorites);
+            favIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2.5L14.5246 8.52504L21 9.4754L16.5 14.1246L17.5492 20.5L12 17.5L6.45078 20.5L7.5 14.1246L3 9.4754L9.4754 8.52504L12 2.5Z" />
+</svg>`;
+            favIcon.removeEventListener("click", removeFromFavorites);
+            favIcon.addEventListener("click", addToFavorites);
+        }
+
+        function addToFavorites() {
+            const movieToAdd = {
+                Title: movie.Title,
+                Year: movie.Year,
+                imdbID: movie.imdbID,
+                Type: movie.Type,
+                Poster: movie.Poster
+            };
+            const updatedFavorites = getFavorites();
+            updatedFavorites.push(movieToAdd);
+            setFavorites(updatedFavorites);
+            favIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="orange" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2.5L14.5246 8.52504L21 9.4754L16.5 14.1246L17.5492 20.5L12 17.5L6.45078 20.5L7.5 14.1246L3 9.4754L9.4754 8.52504L12 2.5Z" />
+</svg>`
+            favIcon.removeEventListener("click", addToFavorites);
+            favIcon.addEventListener("click", removeFromFavorites);
+        }
+
+        favIconDiv.appendChild(favIcon);
 
     }
 
