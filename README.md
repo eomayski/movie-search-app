@@ -100,4 +100,65 @@ Different format posters and some very long movie titles make it very difficult,
 }
 ```
 
-## 5. Conclusions
+## 5. App Functionality
+
+#### 5.1. App Loading
+
+Depending if there are favorites in localStorage or not, the app loads in **Home** view if localStorage is empty or in **Favorites** view if there are already added favorites.
+
+#### 5.2. Searching for movies
+
+To add new favorites the user first have to go to search section and to find his favorite movies.
+
+The search section is accessing throw magnifier icon in top navigational menu.
+
+There is search form in search section which the user shall use. The user must input in the input field his search team. If input form is empty on submit the app doesn't do nothing.
+
+If search term is submitted but movie is not found the user receives browser alert with server message *"Movie not found!"*
+
+After every search the search form are reset (emptied).
+
+If movie or movies are found they are rendered in the search view. No more then 10 movies are send from the server on one page.
+
+If the user wants to see next pages with results there are navigation buttons bellow rendered movies.
+
+If the user is on first page there are button only for next page because there is no previous page and such button will be misleading. Also if the user is on the last page there is no button for next page.
+
+#### 5.3. Adding movies to favorites
+
+Every movie card has star icon showing if this movie is in the favorites (the start is orange) or not (the star is empty).
+
+The user can add or remove every movie by clicking on its star icon. If clicked the icon changes its view.
+
+#### 5.4 Favorites view
+
+The favorites view are either rendered on load or can be accessed from book icon on the navigational menu.
+
+When accessed favorites view loads all movies in localStorage.
+
+All movies in favorites view are with orange star icons because they are added to favorites.
+
+If the user clicks on movies star icon this movie is remover from Favorites in localStorage and on click is removed from favorites view.
+
+#### 5.5. Movie details
+
+Both in search view and in favorites view the movies have details button for accessing details view for every movie.
+
+From clicked details button (button dataset) the app takes imdbID of the movie and sends search by id to the OMDb API.
+
+After receiving the data the app is rending details view for the movie with Genre, Director, Cast, Plot and IMDB rating.
+
+In details view the movie also have star icon for managing its favorites status. The icon is in upper right corner of the poster.
+
+This is in general for the app. I am attaching short video demonstration of its functionality.
+
+![Short Video](/screenshots/video.gif)
+
+
+## 6. Conclusions
+
+The program certainly has its flaws. The CSS isn't polished enough and there is some repetitive code, but it works, and working on it was extremely satisfying and helpful.
+
+I learned so much and applied old knowledge. Maybe the only drawback of the task is that only GET requests are made, but it was still very interesting.
+
+I have to admit I wasn't very sure what to write in this README. I hope it don't look ridiculous. This is the first README I've ever written, and it was a very interesting experience. I was also intimidated to work with GitHub until now, but I'm starting to get used to it and to appreciate it.
