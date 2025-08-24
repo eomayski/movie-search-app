@@ -153,10 +153,9 @@
     function onSearch(event) {
         event.preventDefault();
         searchPage = 1;
-        
+
         // Remove pagination buttons if they exist
-        document.getElementById("prev-page-btn")?.remove();
-        document.getElementById("next-page-btn")?.remove();
+        document.getElementById("pagination")?.remove();
 
         const formData = new FormData(event.target);
         const search = formData.get('search').trim();
@@ -184,20 +183,25 @@
         movies.forEach(movie => createMovie(movie));
 
         //Something like pagination
+
+        
+        const paginationDiv = document.createElement("div")
+        paginationDiv.id = "pagination";
+        main.appendChild(paginationDiv);
         const prevPageBtn = document.createElement("button");
         const nextPageBtn = document.createElement("button");
         
         if (searchPage > 1) {
 
             prevPageBtn.id = "prev-page-btn";
-            prevPageBtn.textContent = "Previous Page";
+            prevPageBtn.textContent = "<";
             prevPageBtn.addEventListener("click", () => {
                 searchPage-= 2;
                 showAllMovies(search);
                 prevPageBtn.remove();
                 nextPageBtn.remove();
             });
-            main.appendChild(prevPageBtn);     
+            paginationDiv.appendChild(prevPageBtn);     
         }
 
 
@@ -206,13 +210,13 @@
 
         if (nextMovies && nextMovies.length > 0) {
             nextPageBtn.id = "next-page-btn";
-            nextPageBtn.textContent = "Next Page";
+            nextPageBtn.textContent = ">";
             nextPageBtn.addEventListener("click", () => {
                 showAllMovies(currentSearch);
                 nextPageBtn.remove();
                 prevPageBtn.remove();
             });
-            main.appendChild(nextPageBtn);
+            paginationDiv.appendChild(nextPageBtn);
         } else { searchPage = 1;}
     }
 
