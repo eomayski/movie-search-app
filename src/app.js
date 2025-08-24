@@ -1,8 +1,8 @@
 (() => {
     const URL = 'https://www.omdbapi.com';
     const apiKey = `da16754b`; // If you want to use your own API key, replace this with your key.
+    
     let searchPage = 1;
-    let favoritesPage = 1;
 
     const homeBtn = document.getElementById('home-btn');
     const searchBtn = document.getElementById('search-btn');
@@ -152,6 +152,11 @@
     // Event handler for search form submission
     function onSearch(event) {
         event.preventDefault();
+        searchPage = 1;
+        
+        // Remove pagination buttons if they exist
+        document.getElementById("prev-page-btn")?.remove();
+        document.getElementById("next-page-btn")?.remove();
 
         const formData = new FormData(event.target);
         const search = formData.get('search').trim();
@@ -179,16 +184,33 @@
         movies.forEach(movie => createMovie(movie));
 
         //Something like pagination
+        const prevPageBtn = document.createElement("button");
+        const nextPageBtn = document.createElement("button");
+        
+        if (searchPage > 1) {
+
+            prevPageBtn.id = "prev-page-btn";
+            prevPageBtn.textContent = "Previous Page";
+            prevPageBtn.addEventListener("click", () => {
+                searchPage-= 2;
+                showAllMovies(search);
+                prevPageBtn.remove();
+                nextPageBtn.remove();
+            });
+            main.appendChild(prevPageBtn);     
+        }
+
+
         searchPage++;
         const nextMovies = await getMovieBySearch(search);
 
         if (nextMovies && nextMovies.length > 0) {
-            const nextPageBtn = document.createElement("button");
             nextPageBtn.id = "next-page-btn";
             nextPageBtn.textContent = "Next Page";
             nextPageBtn.addEventListener("click", () => {
                 showAllMovies(currentSearch);
                 nextPageBtn.remove();
+                prevPageBtn.remove();
             });
             main.appendChild(nextPageBtn);
         } else { searchPage = 1;}
