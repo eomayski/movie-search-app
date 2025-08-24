@@ -102,11 +102,11 @@ Different format posters and some very long movie titles make it very difficult,
 
 ## 5. App Functionality
 
-#### 5.1. App Loading
+#### *5.1. App Loading*
 
 Depending if there are favorites in localStorage or not, the app loads in **Home** view if localStorage is empty or in **Favorites** view if there are already added favorites.
 
-#### 5.2. Searching for movies
+#### *5.2. Searching for movies*
 
 To add new favorites the user first have to go to search section and to find his favorite movies.
 
@@ -124,13 +124,13 @@ If the user wants to see next pages with results there are navigation buttons be
 
 If the user is on first page there are button only for next page because there is no previous page and such button will be misleading. Also if the user is on the last page there is no button for next page.
 
-#### 5.3. Adding movies to favorites
+#### *5.3. Adding movies to favorites*
 
 Every movie card has star icon showing if this movie is in the favorites (the start is orange) or not (the star is empty).
 
 The user can add or remove every movie by clicking on its star icon. If clicked the icon changes its view.
 
-#### 5.4 Favorites view
+#### *5.4 Favorites view*
 
 The favorites view are either rendered on load or can be accessed from book icon on the navigational menu.
 
@@ -140,7 +140,7 @@ All movies in favorites view are with orange star icons because they are added t
 
 If the user clicks on movies star icon this movie is remover from Favorites in localStorage and on click is removed from favorites view.
 
-#### 5.5. Movie details
+#### *5.5. Movie details*
 
 Both in search view and in favorites view the movies have details button for accessing details view for every movie.
 
