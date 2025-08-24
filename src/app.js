@@ -15,7 +15,7 @@
     searchBtn.addEventListener('click', goToSearch)
     favoritesBtn.addEventListener('click', goToFavorites)
 
-
+    let stopAlert = false
 
     const favorites = getFavorites();
     if (favorites.length > 0) {
@@ -116,13 +116,18 @@
 
             // Data error handling
             if (data.Response === "False") {
-                debugger
                 throw new Error(data.Error);
             }
 
             return data.Search
         } catch (error) {
-            alert(error.message);
+
+            if (stopAlert === true) {
+                console.log(error.message);
+                
+            } else {
+                alert(error.message);
+            }
 
         }
 
@@ -194,7 +199,13 @@
         movieList.innerHTML = "";
         movies.forEach(movie => createMovie(movie));
 
-        //Something like pagination
+        nextPage(search)
+       
+    }
+
+   async function nextPage(search) {
+        
+         //Something like pagination
 
         const paginationDiv = document.createElement("div")
         paginationDiv.id = "pagination";
@@ -217,7 +228,10 @@
 
 
         searchPage++;
+
+        stopAlert = true
         const nextMovies = await getMovieBySearch(search);
+        stopAlert = false
 
         if (nextMovies.length > 0) {
             nextPageBtn.id = "next-page-btn";
@@ -229,6 +243,8 @@
             });
             paginationDiv.appendChild(nextPageBtn);
         } else { searchPage = 1; }
+
+
     }
 
     function createMovie(movie) {
